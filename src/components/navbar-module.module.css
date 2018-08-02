@@ -1,0 +1,49 @@
+.navbarItems {
+  display: flex;
+  color: #3b3a3a;
+}
+.navbarLink {
+  color: #3b3a3a;
+  padding-right: 40px;
+  text-decoration: none;
+}
+.navbarLinkVisited {
+  color: #f7df1e;
+  padding-right: 40px;
+  text-decoration: none;
+}
+
+.navbarLinkEmail {
+  color: #c9c9c9;
+}
+
+.navbarLink:hover {
+  color: #f7df1e;
+  transition: 0.8s;
+}
+
+.navbarItemsRight {
+  margin-left: auto;
+}
+
+.navbarLinkToggle {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbarItems {
+    flex-direction: column;
+  }
+  .navbarItemsRight {
+    display: none;
+  }
+  .navbarLinkToggle {
+    align-self: flex-end;
+    display: initial;
+    position: absolute;
+    cursor: pointer;
+  }
+  .navbarToggleShow {
+    display: flex;
+  }
+}
