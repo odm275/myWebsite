@@ -10,9 +10,14 @@ module.exports = {
         accessToken:
           'ad783b5e48b9f84a0f75b913c285e9c590574dbeed7c34b31093417653d05168',
       },
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography.js`,
+      },
     },
     'gatsby-plugin-react-helmet',
     `gatsby-plugin-glamor`,
     `gatsby-transformer-remark`,
+    `gatsby-plugin-typography`,
   ],
 }

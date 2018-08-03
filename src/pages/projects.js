@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 
-const BlogPost = ({ node }) => {
+const ProjectPost = ({ node }) => {
   return (
     <li
       style={{
@@ -12,40 +12,38 @@ const BlogPost = ({ node }) => {
       <Link to={node.slug}>
         <img src={node.featuredImage.resolutions.src} />
       </Link>
-      <header>
-        <Link to={node.slug}>
-          <h2>{node.title}</h2>
-        </Link>
-        <time>{node.publishDate}</time>
-      </header>
-      <div>{node.content.childMarkdownRemark.excerpt}</div>
+      <Link to={node.slug}>
+        <h2>{node.title}</h2>
+      </Link>
+      <div>{node.description.childMarkdownRemark.excerpt}</div>
     </li>
   )
 }
 
-const BlogPage = ({ data }) => (
+const ProjectPage = ({ data }) => (
   <div>
     <ul
       css={{
         textAlign: 'center',
       }}
     >
-      {data.allContentfulBlog.edges.map(edge => <BlogPost node={edge.node} />)}
+      {data.allContentfulProject.edges.map(edge => (
+        <ProjectPost node={edge.node} />
+      ))}
     </ul>
   </div>
 )
 
-export default BlogPage
+export default ProjectPage
 
 export const pageQuery = graphql`
-  query blogQuery {
-    allContentfulBlog(filter: { node_locale: { eq: "en-US" } }) {
+  query projectQuery {
+    allContentfulProject(filter: { node_locale: { eq: "en-US" } }) {
       edges {
         node {
           title
           slug
-          publishDate
-          content {
+          description {
             childMarkdownRemark {
               excerpt
             }

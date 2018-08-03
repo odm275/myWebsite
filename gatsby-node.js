@@ -8,7 +8,15 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     resolve(
       graphql(`
         {
-          allContentfulBlog(limit: 100) {
+          allContentfulBlog(limit: 1000) {
+            edges {
+              node {
+                id
+                slug
+              }
+            }
+          }
+          allContentfulProject(limit: 1000) {
             edges {
               node {
                 id
@@ -21,17 +29,22 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         if (result.errors) {
           reject(result.errors)
         }
-        result.data.allContentfulBlog.edges.forEach(edge => {
-          createPage({
-            path: edge.node.slug,
-            component: blogPostTemplate,
-            context: {
-              slug: edge.node.slug,
-            },
-          })
-        })
+        console.log(result)
+        createPages(result.data.allContentfulBlog, blogPostTemplate)
+        createPages(result.data.allContentfulProject, projectPostTemplate)
         return
       })
     )
   })
+  function createPages(queryResult, template) {
+    queryResult.edges.forEach(edge => {
+      createPage({
+        path: edge.node.slug,
+        component: template,
+        context: {
+          slug: edge.node.slug,
+        },
+      })
+    })
+  }
 }
