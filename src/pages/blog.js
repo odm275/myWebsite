@@ -3,12 +3,7 @@ import Link from 'gatsby-link'
 
 const BlogPost = ({ node }) => {
   return (
-    <li
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <li style={{}}>
       <Link to={node.slug}>
         <img src={node.featuredImage.resolutions.src} />
       </Link>
@@ -28,6 +23,8 @@ const BlogPage = ({ data }) => (
     <ul
       css={{
         textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       {data.allContentfulBlog.edges.map(edge => <BlogPost node={edge.node} />)}

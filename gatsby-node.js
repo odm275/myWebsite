@@ -29,7 +29,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         if (result.errors) {
           reject(result.errors)
         }
-        console.log(result)
         createPages(result.data.allContentfulBlog, blogPostTemplate)
         createPages(result.data.allContentfulProject, projectPostTemplate)
         return

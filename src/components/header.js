@@ -31,7 +31,6 @@ class Header extends Component {
       { text: 'Blog', id: '2', to: '/blog' },
       { text: 'Projects', id: '3', to: '/projects' },
     ]
-    console.log(this.state.currentTab)
 
     return (
       <Navbar>

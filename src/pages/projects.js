@@ -3,36 +3,63 @@ import Link from 'gatsby-link'
 
 const ProjectPost = ({ node }) => {
   return (
-    <li
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <li>
       <Link to={node.slug}>
         <img src={node.featuredImage.resolutions.src} />
       </Link>
-      <Link to={node.slug}>
-        <h2>{node.title}</h2>
+      <Link
+        to={node.slug}
+        style={{
+          color: '#3b3a3a',
+          textDecoration: 'none',
+        }}
+      >
+        <p
+          css={{
+            marginTop: '5px',
+            marginBottom: '5px',
+            fontSize: '1.2rem',
+            ':hover': {
+              textDecoration: `underline`,
+            },
+          }}
+        >
+          {node.title}
+        </p>
       </Link>
-      <div>{node.description.childMarkdownRemark.excerpt}</div>
+      <p
+        style={{
+          color: '#c9c9c9',
+        }}
+      >
+        {node.shortPreview}
+      </p>
     </li>
   )
 }
 
-const ProjectPage = ({ data }) => (
-  <div>
-    <ul
-      css={{
-        textAlign: 'center',
+const ProjectPage = ({ data }) => {
+  console.log(data)
+  return (
+    <div
+      style={{
+        paddingTop: '20px',
       }}
     >
-      {data.allContentfulProject.edges.map(edge => (
-        <ProjectPost node={edge.node} />
-      ))}
-    </ul>
-  </div>
-)
+      <ul
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          listStyleType: 'none',
+        }}
+      >
+        {data.allContentfulProject.edges.map(edge => (
+          <ProjectPost node={edge.node} />
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 export default ProjectPage
 
@@ -43,13 +70,9 @@ export const pageQuery = graphql`
         node {
           title
           slug
-          description {
-            childMarkdownRemark {
-              excerpt
-            }
-          }
+          shortPreview
           featuredImage {
-            resolutions(width: 600, height: 300) {
+            resolutions(width: 400, height: 400) {
               src
             }
           }

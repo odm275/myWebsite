@@ -1,80 +1,123 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import Header from '../components/header'
-const Intro = () => (
-  <section className="intro">
-    <p
-      css={{
-        fontSize: '1.8rem',
-        lineHeight: '2.6rem',
-      }}
-    >
-      Hey, I'm a software developer from Houston, Texas. I can help you build
-      your next product.
-    </p>
-    <div>
-      <p
+import { css } from 'glamor'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import ProjectPage from './projects'
+class Intro extends Component {
+  render() {
+    let bounce = css.keyframes({
+      '0%': { transform: 'scale(1)' },
+      '50%': { transform: 'scale(1.2)' },
+      '100%': { transform: 'scale(1)' },
+    })
+    return (
+      <section
+        className="intro"
         css={{
-          padding: 0,
-          margin: '0 0 0.5rem 0',
+          width: 'auto',
+          height: '95vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
         }}
       >
-        I design, build, &amp; operate full-stack web applications.
-      </p>
-      <p
-        css={{
-          padding: 0,
-          margin: '0 0 0.5rem 0',
-        }}
-      >
-        Have a project you'd like to discuss?
-      </p>
-      <p
-        css={{
-          padding: 0,
-          margin: 0,
-        }}
-      >
-        Let's chat <a href="">pomejia@gmail.com</a>
-      </p>
-    </div>
-  </section>
-)
+        <p
+          css={{
+            fontSize: '1.8rem',
+            lineHeight: '2.6rem',
+          }}
+        >
+          Hey, I'm a software developer from Houston, Texas. I can help you
+          build your next product.
+        </p>
+        <p
+          css={{
+            padding: 0,
+          }}
+        >
+          I design, build, &amp; operate full-stack web applications.
+        </p>
+        <p
+          css={{
+            padding: 0,
+          }}
+        >
+          Have a project you'd like to discuss?
+        </p>
+        <p
+          css={{
+            padding: 0,
+            margin: 0,
+            lineHeight: '2.3rem',
+          }}
+        >
+          Let's chat <a href="">pomejia@gmail.com</a>
+        </p>
+        <FontAwesomeIcon
+          icon={faAngleDown}
+          size="2x"
+          style={{ alignSelf: 'flex-end', animation: `${bounce} 2s infinite` }}
+        />
+      </section>
+    )
+  }
+}
 
-const RecentWork = ({ node }) => {
+//data.allContentfulBlog.edges
+const FeaturedProjects = ({ data }) => {
   // graphql query
   return (
-    <div>
-      <p>lol</p>
-    </div>
+    <section>
+      <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>Recent Work</div>
+        <div>
+          <a href="">View All</a>
+        </div>
+      </nav>
+      <ProjectPage data={data} />
+    </section>
   )
 }
 
-const Skills = ({ node }) => {
-  const skills = [{}]
-  return
-  ;<div>
-    <h2>
-      I understand the challenges of working independetly &amp; in a group.
-      Here’s a couple of things I’m good at.
-    </h2>
-    <ul>
-      <li>Organization</li>
+const Skills = ({ node }) => (
+  <div
+    className="skills"
+    style={{
+      display: 'flex',
+    }}
+  >
+    <div>
+      <p
+        style={{
+          fontSize: '1.5rem',
+          lineHeight: '3rem',
+        }}
+      >
+        I understand the challenges of working independetly &amp; in a group.
+        Here’s a couple of things I’m good at.
+      </p>
+    </div>
+    <ul
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        fontSize: '1.2rem',
+        listStyleType: 'none',
+      }}
+    >
+      <li>
+        Organization
+        <br />
+      </li>
       <li>Time Keeping</li>
       <li>Project Management</li>
       <li>Communication</li>
     </ul>
   </div>
-}
-
-const FeaturedProject = ({ node }) => (
-  //Graphql query
-  <div>
-    <div />
-  </div>
 )
 
-const Social = ({ node }) => {
+const Social = () => {
   const social = [
     {
       github: 'https://github.com/odm275',
@@ -89,7 +132,7 @@ const Social = ({ node }) => {
   )
 }
 
-const HireMe = ({ node }) => (
+const HireMe = () => (
   <div>
     <div>
       So are you looking for a professional, communicative &amp; punctual
@@ -106,10 +149,33 @@ const HireMe = ({ node }) => (
   </div>
 )
 
-const IndexPage = ({ data }) => (
-  <div>
-    <Intro />
-  </div>
-)
+const IndexPage = ({ data }) => {
+  return (
+    <div>
+      <Intro />
+      <FeaturedProjects data={data} />
+      <Skills />
+    </div>
+  )
+}
 
 export default IndexPage
+
+export const featuredProjectsQuery = graphql`
+  query featuredProjectsQuery {
+    allContentfulProject(filter: { featured: { eq: true } }) {
+      edges {
+        node {
+          title
+          slug
+          customer
+          featuredImage {
+            resolutions(width: 400, height: 400) {
+              src
+            }
+          }
+        }
+      }
+    }
+  }
+`
