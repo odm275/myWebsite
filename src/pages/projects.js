@@ -39,6 +39,7 @@ const ProjectPost = ({ node }) => {
 }
 
 const ProjectPage = ({ data }) => {
+  console.log('project page')
   console.log(data)
   return (
     <div
@@ -53,9 +54,7 @@ const ProjectPage = ({ data }) => {
           listStyleType: 'none',
         }}
       >
-        {data.allContentfulProject.edges.map(edge => (
-          <ProjectPost node={edge.node} />
-        ))}
+        {data.edges.map(edge => <ProjectPost node={edge.node} />)}
       </ul>
     </div>
   )

@@ -1,0 +1,20 @@
+/* Footer Component */
+.footerBlock {
+  width: 100vw;
+  height: auto;
+  background-color: #262626;
+}
+.footerContainer {
+  display: flex;
+  justify-content: center;
+  color: #5d5d5d;
+}
+.footerContainer ul {
+  margin-top: 2rem;
+}
+.footerContainer ul li {
+  list-style-type: none;
+}
+.title {
+  color: #c9c9c9;
+}

@@ -4,68 +4,69 @@ import { css } from 'glamor'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import ProjectPage from './projects'
-class Intro extends Component {
-  render() {
-    let bounce = css.keyframes({
-      '0%': { transform: 'scale(1)' },
-      '50%': { transform: 'scale(1.2)' },
-      '100%': { transform: 'scale(1)' },
-    })
-    return (
-      <section
-        className="intro"
+import styles from './index-module.module.css'
+
+const Intro = () => {
+  let bounce = css.keyframes({
+    '0%': { transform: 'scale(1)' },
+    '50%': { transform: 'scale(1.2)' },
+    '100%': { transform: 'scale(1)' },
+  })
+  return (
+    <section
+      className="intro"
+      css={{
+        width: 'auto',
+        height: '95vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      <p
         css={{
-          width: 'auto',
-          height: '95vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
+          fontSize: '1.8rem',
+          lineHeight: '2.6rem',
         }}
       >
-        <p
-          css={{
-            fontSize: '1.8rem',
-            lineHeight: '2.6rem',
-          }}
-        >
-          Hey, I'm a software developer from Houston, Texas. I can help you
-          build your next product.
-        </p>
-        <p
-          css={{
-            padding: 0,
-          }}
-        >
-          I design, build, &amp; operate full-stack web applications.
-        </p>
-        <p
-          css={{
-            padding: 0,
-          }}
-        >
-          Have a project you'd like to discuss?
-        </p>
-        <p
-          css={{
-            padding: 0,
-            margin: 0,
-            lineHeight: '2.3rem',
-          }}
-        >
-          Let's chat <a href="">pomejia@gmail.com</a>
-        </p>
-        <FontAwesomeIcon
-          icon={faAngleDown}
-          size="2x"
-          style={{ alignSelf: 'flex-end', animation: `${bounce} 2s infinite` }}
-        />
-      </section>
-    )
-  }
+        Hey, I'm a software developer from Houston, Texas. I can help you build
+        your next product.
+      </p>
+      <p
+        css={{
+          padding: 0,
+        }}
+      >
+        I design, build, &amp; operate full-stack web applications.
+      </p>
+      <p
+        css={{
+          padding: 0,
+        }}
+      >
+        Have a project you'd like to discuss?
+      </p>
+      <p
+        css={{
+          padding: 0,
+          margin: 0,
+          lineHeight: '2.3rem',
+        }}
+      >
+        Let's chat <a href="">pomejia@gmail.com</a>
+      </p>
+      <FontAwesomeIcon
+        icon={faAngleDown}
+        size="2x"
+        style={{ alignSelf: 'flex-end', animation: `${bounce} 2s infinite` }}
+      />
+    </section>
+  )
 }
 
 //data.allContentfulBlog.edges
-const FeaturedProjects = ({ data }) => {
+const RecentWork = ({ data }) => {
+  console.log(data)
   // graphql query
   return (
     <section>
@@ -80,81 +81,164 @@ const FeaturedProjects = ({ data }) => {
   )
 }
 
-const Skills = ({ node }) => (
-  <div
-    className="skills"
-    style={{
-      display: 'flex',
-    }}
-  >
-    <div>
-      <p
-        style={{
-          fontSize: '1.5rem',
-          lineHeight: '3rem',
-        }}
-      >
-        I understand the challenges of working independetly &amp; in a group.
-        Here’s a couple of things I’m good at.
-      </p>
-    </div>
-    <ul
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        fontSize: '1.2rem',
-        listStyleType: 'none',
-      }}
-    >
-      <li>
-        Organization
-        <br />
-      </li>
-      <li>Time Keeping</li>
-      <li>Project Management</li>
-      <li>Communication</li>
-    </ul>
-  </div>
-)
-
-const Social = () => {
-  const social = [
-    {
-      github: 'https://github.com/odm275',
-      freecodecamp: 'https://www.freecodecamp.org/odm275',
-      codepen: 'https://codepen.io/omejia/#',
-    },
-  ]
+const Skills = () => {
+  const {
+    sectionTitle,
+    skillsSection,
+    skillsPreview,
+    skillsList,
+    skillTitle,
+  } = styles
   return (
     <div>
-      <div>social</div>
+      <p className={sectionTitle}>Skills</p>
+      <section className={skillsSection}>
+        <p className={skillsPreview}>
+          I understand the challenges of working independetly &amp; in a group.
+          Here’s a couple of things I’m good at.
+        </p>
+        <ul className={skillsList}>
+          <li>
+            <p className={skillTitle}>Organization</p>
+
+            <p>
+              I believe it’s important to stay organised while working remotely.
+              I use the likes of Trello &amp; Basecamp to help keep projects
+              on-track and under control.
+            </p>
+          </li>
+          <li>
+            <p className={skillTitle}>Time Keeping</p>
+            <p>
+              I value my clients’ time and always aim to work efficiently. I
+              account for and track everything I do using services such as Toggl
+              and my custom build pomodoro.
+            </p>
+          </li>
+          <li>
+            <p className={skillTitle}>Project Management</p>
+            <p>
+              I think it’s important to identify the discrete stages of a
+              project and work to a schedule around those.
+            </p>
+          </li>
+          <li>
+            <p className={skillTitle}>Communication</p>
+            <p>
+              I realize the importance of good communication. I use tools like
+              Slack to make sure we’re always on the same page.
+            </p>
+          </li>
+        </ul>
+      </section>
     </div>
   )
 }
 
-const HireMe = () => (
-  <div>
+const HighlightProject = ({ data }) => {
+  console.log(data.allContentfulProject.edges)
+  data.allContentfulProject.edges.indexOf('')
+  return (
+    <section>
+      <p>Featured Project</p>
+    </section>
+  )
+}
+
+const Social = () => {
+  const { sectionTitle, socialSection, socialContact, socialLink } = styles
+  const socialMedias = {
+    Github: 'https://github.com/odm275',
+    Freecodecamp: 'https://www.freecodecamp.org/odm275',
+    Codepen: 'https://codepen.io/omejia/#',
+  }
+
+  return (
     <div>
-      So are you looking for a professional, communicative &amp; punctual
-      software engineer with adaptative full-stack web development skills for
-      your next project?
+      <div />
+      <section className={socialSection}>
+        <ul className={socialContact}>
+          <p className={sectionTitle}>Social</p>
+
+          {Object.keys(socialMedias).map((key, index) => (
+            <li className>
+              {
+                <a href={socialMedias[key]} className={socialLink}>
+                  {key}
+                </a>
+              }
+            </li>
+          ))}
+        </ul>
+        <ul className={socialContact}>
+          <p className={sectionTitle}>Contact</p>
+
+          <li style={{ fontSize: '1.3rem' }}>Get in touch: </li>
+          <li>
+            <a
+              href="mailto:pomejia@gmail.com?subject=Hey Oscar"
+              css={{
+                color: '#f7df1e',
+                ':hover': {
+                  color: '#d1b900',
+                },
+                fontSize: '1.1rem',
+              }}
+            >
+              pomejia@gmail.com
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
-    <h3>
-      If you have an application you are interested in developing with web
-      technology, I’d love to work with you on it. I’m a full-stack developer
-      which means I can bring your project from <b>concept to completion</b>. I
-      work primarily with Node.js on the back-end and React on the front-end but
-      picking up new languages or frameworks isn’t a problem.
-    </h3>
-  </div>
-)
+  )
+}
+
+const HireMe = () => {
+  const { sectionTitle } = styles
+  return (
+    <section>
+      <p className={sectionTitle}>Hire me</p>
+      <div style={{ fontSize: '1.2rem', lineHeight: '2rem' }}>
+        <p>
+          So are you looking for a professional, communicative &amp; punctual
+          software engineer with adaptative full-stack web development skills
+          for your next project?
+        </p>
+        <p>
+          If you have an application you are interested in developing with web
+          technology, I’d love to work with you on it. I’m a full-stack
+          developer which means I can bring your project from{' '}
+          <b>concept to completion</b>. I work primarily with Node.js on the
+          back-end and React on the front-end but picking up new languages or
+          frameworks isn’t a problem.
+        </p>
+        <a
+          href="mailto:pomejia@gmail.com?subject=Hey Oscar"
+          css={{
+            color: '#f7df1e',
+            ':hover': {
+              color: '#d1b900',
+            },
+            fontSize: '1.1rem',
+          }}
+        >
+          pomejia@gmail.com
+        </a>
+      </div>
+    </section>
+  )
+}
 
 const IndexPage = ({ data }) => {
   return (
     <div>
       <Intro />
-      <FeaturedProjects data={data} />
+      <RecentWork data={data.featured} />
       <Skills />
+      <HighlightProject data={data.highlight} />
+      <Social />
+      <HireMe />
     </div>
   )
 }
@@ -162,8 +246,22 @@ const IndexPage = ({ data }) => {
 export default IndexPage
 
 export const featuredProjectsQuery = graphql`
-  query featuredProjectsQuery {
-    allContentfulProject(filter: { featured: { eq: true } }) {
+  query indexPage {
+    featured: allContentfulProject(filter: { featured: { eq: true } }) {
+      edges {
+        node {
+          title
+          slug
+          customer
+          featuredImage {
+            resolutions(width: 400, height: 400) {
+              src
+            }
+          }
+        }
+      }
+    }
+    highlight: allContentfulProject(filter: { highlight: { eq: true } }) {
       edges {
         node {
           title
