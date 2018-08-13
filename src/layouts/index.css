@@ -631,3 +631,14 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+.App div section:not(:nth-child(1)):not(:nth-child(2)) {
+  padding-top: 5rem;
+}
+.App div section:last-child {
+  padding-bottom: 5rem;
+}
+.upArrow {
+}
+.upArrow--vanish {
+}

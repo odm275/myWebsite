@@ -5,7 +5,10 @@ const ProjectPost = ({ node }) => {
   return (
     <li>
       <Link to={node.slug}>
-        <img src={node.featuredImage.resolutions.src} />
+        <img
+          src={node.featuredImage.resolutions.src}
+          style={{ width: '100%' }}
+        />
       </Link>
       <Link
         to={node.slug}
@@ -27,34 +30,40 @@ const ProjectPost = ({ node }) => {
           {node.title}
         </p>
       </Link>
-      <p
-        style={{
-          color: '#c9c9c9',
-        }}
-      >
-        {node.shortPreview}
-      </p>
+      <p style={{ color: '#c9c9c9' }}>{node.shortPreview}</p>
     </li>
   )
 }
 
 const ProjectPage = ({ data }) => {
-  console.log('project page')
-  console.log(data)
+  let projectStyle
+  if (data.allContentfulProject.edges.length > 1) {
+    projectStyle = {
+      display: 'grid',
+      justifyItems: 'stretch',
+      gridRowGap: '30px',
+      gridColumnGap: '30px',
+      gridTemplateColumns: '1fr 1fr',
+      listStyleType: 'none',
+      marginLeft: 0,
+    }
+  } else {
+    projectStyle = {
+      listStyleType: 'none',
+      marginLeft: 0,
+    }
+  }
+
   return (
     <div
       style={{
         paddingTop: '20px',
       }}
     >
-      <ul
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          listStyleType: 'none',
-        }}
-      >
-        {data.edges.map(edge => <ProjectPost node={edge.node} />)}
+      <ul style={projectStyle}>
+        {data.allContentfulProject.edges.map(edge => (
+          <ProjectPost node={edge.node} />
+        ))}
       </ul>
     </div>
   )
@@ -63,7 +72,7 @@ const ProjectPage = ({ data }) => {
 export default ProjectPage
 
 export const pageQuery = graphql`
-  query projectQuery {
+  query projectsQuery {
     allContentfulProject(filter: { node_locale: { eq: "en-US" } }) {
       edges {
         node {

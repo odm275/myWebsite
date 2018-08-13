@@ -1,82 +1,57 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import { css } from 'glamor'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import ProjectPage from './projects'
 import styles from './index-module.module.css'
 
 const Intro = () => {
-  let bounce = css.keyframes({
-    '0%': { transform: 'scale(1)' },
-    '50%': { transform: 'scale(1.2)' },
-    '100%': { transform: 'scale(1)' },
-  })
+  const { introContainer, primaryIntro, secondaryIntro, downArrow } = styles
   return (
-    <section
-      className="intro"
-      css={{
-        width: 'auto',
-        height: '95vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
-    >
-      <p
-        css={{
-          fontSize: '1.8rem',
-          lineHeight: '2.6rem',
-        }}
-      >
+    <section className={introContainer}>
+      <p className={primaryIntro}>
         Hey, I'm a software developer from Houston, Texas. I can help you build
         your next product.
       </p>
-      <p
-        css={{
-          padding: 0,
-        }}
-      >
-        I design, build, &amp; operate full-stack web applications.
-      </p>
-      <p
-        css={{
-          padding: 0,
-        }}
-      >
-        Have a project you'd like to discuss?
-      </p>
-      <p
-        css={{
-          padding: 0,
-          margin: 0,
-          lineHeight: '2.3rem',
-        }}
-      >
-        Let's chat <a href="">pomejia@gmail.com</a>
-      </p>
-      <FontAwesomeIcon
-        icon={faAngleDown}
-        size="2x"
-        style={{ alignSelf: 'flex-end', animation: `${bounce} 2s infinite` }}
-      />
+      <div className={secondaryIntro}>
+        <p>I design, build, &amp; operate full-stack web applications.</p>
+        <p>Have a project you'd like to discuss?</p>
+        <p>
+          Let's chat{' '}
+          <a
+            href="mailto:pomejia@gmail.com?subject=Hey Oscar"
+            css={{
+              color: '#f7df1e',
+              ':hover': {
+                color: '#d1b900',
+              },
+              fontSize: '1.1rem',
+            }}
+          >
+            pomejia@gmail.com
+          </a>
+        </p>
+      </div>
+      <FontAwesomeIcon icon={faAngleDown} size="2x" className={downArrow} />
     </section>
   )
 }
 
 //data.allContentfulBlog.edges
 const RecentWork = ({ data }) => {
-  console.log(data)
+  let dataPrime = { allContentfulProject: {} }
+  dataPrime.allContentfulProject = data.featured
+  const { sectionTitle } = styles
   // graphql query
   return (
     <section>
       <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>Recent Work</div>
+        <div className={sectionTitle}>Recent Work</div>
         <div>
           <a href="">View All</a>
         </div>
       </nav>
-      <ProjectPage data={data} />
+      <ProjectPage data={dataPrime} />
     </section>
   )
 }
@@ -90,9 +65,9 @@ const Skills = () => {
     skillTitle,
   } = styles
   return (
-    <div>
+    <section>
       <p className={sectionTitle}>Skills</p>
-      <section className={skillsSection}>
+      <div className={skillsSection}>
         <p className={skillsPreview}>
           I understand the challenges of working independetly &amp; in a group.
           Here’s a couple of things I’m good at.
@@ -130,17 +105,20 @@ const Skills = () => {
             </p>
           </li>
         </ul>
-      </section>
-    </div>
+      </div>
+    </section>
   )
 }
 
 const HighlightProject = ({ data }) => {
-  console.log(data.allContentfulProject.edges)
-  data.allContentfulProject.edges.indexOf('')
+  let dataPrime = { allContentfulProject: {} }
+  dataPrime.allContentfulProject = data.highlight
+  const { sectionTitle } = styles
+
   return (
     <section>
-      <p>Featured Project</p>
+      <p className={sectionTitle}>Featured Project</p>
+      <ProjectPage data={dataPrime} />
     </section>
   )
 }
@@ -154,43 +132,40 @@ const Social = () => {
   }
 
   return (
-    <div>
-      <div />
-      <section className={socialSection}>
-        <ul className={socialContact}>
-          <p className={sectionTitle}>Social</p>
+    <section className={socialSection}>
+      <ul className={socialContact}>
+        <p className={sectionTitle}>Social</p>
 
-          {Object.keys(socialMedias).map((key, index) => (
-            <li className>
-              {
-                <a href={socialMedias[key]} className={socialLink}>
-                  {key}
-                </a>
-              }
-            </li>
-          ))}
-        </ul>
-        <ul className={socialContact}>
-          <p className={sectionTitle}>Contact</p>
-
-          <li style={{ fontSize: '1.3rem' }}>Get in touch: </li>
-          <li>
-            <a
-              href="mailto:pomejia@gmail.com?subject=Hey Oscar"
-              css={{
-                color: '#f7df1e',
-                ':hover': {
-                  color: '#d1b900',
-                },
-                fontSize: '1.1rem',
-              }}
-            >
-              pomejia@gmail.com
-            </a>
+        {Object.keys(socialMedias).map((key, index) => (
+          <li className>
+            {
+              <a href={socialMedias[key]} className={socialLink}>
+                {key}
+              </a>
+            }
           </li>
-        </ul>
-      </section>
-    </div>
+        ))}
+      </ul>
+      <ul className={socialContact}>
+        <p className={sectionTitle}>Contact</p>
+
+        <li style={{ fontSize: '1.3rem' }}>Get in touch: </li>
+        <li>
+          <a
+            href="mailto:pomejia@gmail.com?subject=Hey Oscar"
+            css={{
+              color: '#f7df1e',
+              ':hover': {
+                color: '#d1b900',
+              },
+              fontSize: '1.1rem',
+            }}
+          >
+            pomejia@gmail.com
+          </a>
+        </li>
+      </ul>
+    </section>
   )
 }
 
@@ -199,7 +174,7 @@ const HireMe = () => {
   return (
     <section>
       <p className={sectionTitle}>Hire me</p>
-      <div style={{ fontSize: '1.2rem', lineHeight: '2rem' }}>
+      <div style={{ fontSize: '1.3rem', lineHeight: '2.5rem' }}>
         <p>
           So are you looking for a professional, communicative &amp; punctual
           software engineer with adaptative full-stack web development skills
@@ -234,9 +209,9 @@ const IndexPage = ({ data }) => {
   return (
     <div>
       <Intro />
-      <RecentWork data={data.featured} />
+      <RecentWork data={data} />
       <Skills />
-      <HighlightProject data={data.highlight} />
+      <HighlightProject data={data} />
       <Social />
       <HireMe />
     </div>
@@ -253,6 +228,7 @@ export const featuredProjectsQuery = graphql`
           title
           slug
           customer
+          shortPreview
           featuredImage {
             resolutions(width: 400, height: 400) {
               src
@@ -267,8 +243,9 @@ export const featuredProjectsQuery = graphql`
           title
           slug
           customer
+          shortPreview
           featuredImage {
-            resolutions(width: 400, height: 400) {
+            resolutions(width: 921, height: 500) {
               src
             }
           }

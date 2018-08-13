@@ -1,5 +1,6 @@
 .navbarItems {
   display: flex;
+  flex-direction: row;
   color: #3b3a3a;
 }
 .navbarLink {

@@ -35,9 +35,19 @@ class Header extends Component {
     return (
       <Navbar>
         <nav className={styles.navbarItems}>
-          <div className={`${styles.navbarLink}`}>Oscar Mejia</div>
+          <div>
+            <span className={`${styles.navbarLink}`}>Oscar Mejia</span>
+            <br />
+            <span
+              style={{
+                color: '#c9c9c9',
+              }}
+            >
+              Software Developer
+            </span>
+          </div>
           <div
-            onClickToggle={this.onClickToggle}
+            onClick={this.onClickToggle}
             className={`${styles.navbarLink} ${styles.navbarLinkToggle}`}
           >
             <FontAwesomeIcon icon={faBars} />

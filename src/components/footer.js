@@ -52,6 +52,17 @@ const Footer = () => {
           <li>Codepen</li>
         </ul>
       </div>
+      <p
+        style={{
+          paddingTop: '3rem',
+          paddingBottom: '3rem',
+          textAlign: 'center',
+          margin: 0,
+          color: '#c9c9c9',
+        }}
+      >
+        Copyright Oscar Mejia 2018 ©
+      </p>
     </footer>
   )
 }
