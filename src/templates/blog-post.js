@@ -6,7 +6,8 @@ class BlogPost extends Component {
     const { title, content } = this.props.data.contentfulBlog
     return (
       <div>
-        <h1>{title}</h1>
+        <p>{title}</p>
+
         <div
           dangerouslySetInnerHTML={{ __html: content.childMarkdownRemark.html }}
         />

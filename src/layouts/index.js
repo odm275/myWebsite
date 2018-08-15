@@ -34,7 +34,6 @@ const Layout = ({ children, data }) => {
           bottom: '3rem',
         }}
       />
-
       <article
         className="App"
         css={{

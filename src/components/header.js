@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import styles from './navbar-module.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import MobileNav from './mobilenav'
+import Nav from './nav'
 //siteTitle is in props
 
 class Header extends Component {
@@ -16,29 +16,31 @@ class Header extends Component {
     }
 
     this.onClickToggle = this.onClickToggle.bind(this)
+    this.onClickTab = this.onClickTab.bind(this)
   }
   onClickToggle() {
-    console.log('eyy')
     this.setState({ toggleOn: !this.state.toggleOn })
   }
   onClickTab(id, e) {
     this.setState({ currentTab: id })
   }
-
   render() {
-    const tabKeys = [
-      { text: 'About', id: '1', to: '/' },
-      { text: 'Blog', id: '2', to: '/blog' },
-      { text: 'Projects', id: '3', to: '/projects' },
-    ]
+    console.log(this.state.currentTab)
 
     return (
       <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <p>Oscar Mejia</p>
+        <p>
+          Oscar Mejia
+          <br />
+          Software Developer
+        </p>
         <MobileNav
-          onClick={this.onClickToggle}
+          onClickToggle={this.onClickToggle}
           toggleOn={this.state.toggleOn}
+          currentTab={this.state.currentTab}
+          onClick={this.onClickTab}
         />
+        <Nav currentTab={this.state.currentTab} onClick={this.onClickTab} />
       </nav>
     )
   }
