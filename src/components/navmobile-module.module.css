@@ -4,6 +4,12 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .navbarLinkVisited {
+    color: #f7df1e;
+  }
+  .navbarLink {
+    color: #3b3a3a;
+  }
   .mobileNav {
     display: block;
   }
@@ -24,14 +30,8 @@
     padding: 8px;
     text-decoration: none;
     font-size: 20px;
-    color: #818181;
     display: block;
     transition: 0.3s;
-  }
-
-  overlay a:hover,
-  overlay a:focus {
-    color: black;
   }
 
   overlay .closebtn {
@@ -55,14 +55,8 @@
     padding: 8px;
     text-decoration: none;
     font-size: 20px;
-    color: #818181;
     display: block;
     transition: 0.3s;
-  }
-
-  overlayExpand a:hover,
-  overlayExpand a:focus {
-    color: black;
   }
 
   overlayExpand .closebtn {

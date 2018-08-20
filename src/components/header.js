@@ -19,26 +19,31 @@ class Header extends Component {
     this.onClickTab = this.onClickTab.bind(this)
   }
   onClickToggle() {
+    console.log('hey')
     this.setState({ toggleOn: !this.state.toggleOn })
   }
   onClickTab(id, e) {
     this.setState({ currentTab: id })
   }
   render() {
-    console.log(this.state.currentTab)
-
     return (
-      <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <nav
+        style={{
+          display: 'flex',
+          marginTop: '2rem',
+          justifyContent: 'space-between',
+        }}
+      >
         <p>
           Oscar Mejia
           <br />
-          Software Developer
+          <span style={{ color: '#c9c9c9' }}>Software Developer</span>
         </p>
         <MobileNav
           onClickToggle={this.onClickToggle}
           toggleOn={this.state.toggleOn}
           currentTab={this.state.currentTab}
-          onClick={this.onClickTab}
+          onClickTab={this.onClickTab}
         />
         <Nav currentTab={this.state.currentTab} onClick={this.onClickTab} />
       </nav>

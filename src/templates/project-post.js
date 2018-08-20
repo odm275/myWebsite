@@ -12,30 +12,57 @@ class ProjectPost extends Component {
       repo,
       year,
       technologies,
+      category,
+      featuredImage,
     } = this.props.data.contentfulProject
-    const {
-      projectContainer,
-      projectSpecs,
-      projectPost,
-      categoryColor,
-    } = styles
-
-    const categories = [{ link: link }, { technologies: technologies }]
-
+    const { projectContainer, navHeader, navDescription, projectPost } = styles
+    console.log(technologies)
     return (
       <main className={projectContainer}>
         <aside>
-          <p className={projectSpecs} style={{ fontSize: '1.2rem' }}>
-            {title}
-          </p>
-          <p style={{ fontSize: '1.1rem', color: '#c9c9c9' }}>{customer}</p>
+          <nav>
+            {/*Name and costumer*/}
+            <ul>
+              <li className={navHeader}>{title}</li>
+              <li className={navDescription}>{customer}</li>
+            </ul>
+            {/*Year*/}
+            <ul>
+              <li className={navHeader}>Year</li>
+              <li className={navDescription}>{year}</li>
+            </ul>
+            {/*Github Repos*/}
+            <ul>
+              <li className={navHeader}>Links</li>
+              <li className={navDescription}>
+                <a href={link}>Live-link</a>
+              </li>
+              <li className={navDescription}>
+                <a href={repo}>Github Repo</a>
+              </li>
+            </ul>
+            {/*Costumer */}
+            <ul>
+              <li className={navHeader}>Category</li>
+              <li className={navDescription}>{category}</li>
+            </ul>
+            <ul>
+              <li className={navHeader}>Technologies</li>
+              {technologies
+                .split(';')
+                .map(tech => <li className={navDescription}>{tech}</li>)}
+            </ul>
+          </nav>
         </aside>
-        <article
-          className={projectPost}
-          dangerouslySetInnerHTML={{
-            __html: description.childMarkdownRemark.html,
-          }}
-        />
+
+        <artcie className={projectPost}>
+          <img src={featuredImage.resolutions.src} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: description.childMarkdownRemark.html,
+            }}
+          />
+        </artcie>
       </main>
     )
   }
@@ -56,6 +83,13 @@ export const pageQuery = graphql`
       link
       repo
       year
+      category
+      technologies
+      featuredImage {
+        resolutions(width: 700) {
+          src
+        }
+      }
       description {
         childMarkdownRemark {
           html

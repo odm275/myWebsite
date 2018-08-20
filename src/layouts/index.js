@@ -28,11 +28,13 @@ const Layout = ({ children, data }) => {
       <FontAwesomeIcon
         icon={faAngleUp}
         size="2x"
-        style={{
-          position: 'fixed',
-          right: 0,
-          bottom: '3rem',
-        }}
+        className="upArrow"
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        }
       />
       <article
         className="App"

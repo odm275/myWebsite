@@ -7,6 +7,7 @@ import styles from './index-module.module.css'
 
 const Intro = () => {
   const { introContainer, primaryIntro, secondaryIntro, downArrow } = styles
+
   return (
     <section className={introContainer}>
       <p className={primaryIntro}>
@@ -32,7 +33,6 @@ const Intro = () => {
           </a>
         </p>
       </div>
-      <FontAwesomeIcon icon={faAngleDown} size="2x" className={downArrow} />
     </section>
   )
 }
@@ -42,14 +42,19 @@ const RecentWork = ({ data }) => {
   let dataPrime = { allContentfulProject: {} }
   dataPrime.allContentfulProject = data.featured
   const { sectionTitle } = styles
+
   // graphql query
   return (
-    <section>
-      <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <section className="recentWork">
+      <nav
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          paddingBottom: '1rem',
+        }}
+      >
         <div className={sectionTitle}>Recent Work</div>
-        <div>
-          <a href="">View All</a>
-        </div>
+        <div />
       </nav>
       <ProjectPage data={dataPrime} />
     </section>
@@ -65,7 +70,7 @@ const Skills = () => {
     skillTitle,
   } = styles
   return (
-    <section>
+    <section className="skills">
       <p className={sectionTitle}>Skills</p>
       <div className={skillsSection}>
         <p className={skillsPreview}>
@@ -172,7 +177,7 @@ const Social = () => {
 const HireMe = () => {
   const { sectionTitle } = styles
   return (
-    <section>
+    <section className="hireMe">
       <p className={sectionTitle}>Hire me</p>
       <div style={{ fontSize: '1.3rem', lineHeight: '2.5rem' }}>
         <p>
@@ -228,6 +233,7 @@ export const featuredProjectsQuery = graphql`
           title
           slug
           customer
+          technologies
           shortPreview
           featuredImage {
             resolutions(width: 400, height: 400) {
@@ -243,6 +249,7 @@ export const featuredProjectsQuery = graphql`
           title
           slug
           customer
+          technologies
           shortPreview
           featuredImage {
             resolutions(width: 921, height: 500) {

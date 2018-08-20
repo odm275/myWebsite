@@ -10,7 +10,6 @@ const Nav = ({ onClick, currentTab }) => {
   ]
 
   const { navbarItems, navbarLinkVisited, navbarLink, navbarLinkEmail } = styles
-  console.log(currentTab)
   return (
     <nav className={navbarItems}>
       {tabKeys.map((tab, i) => (
@@ -25,7 +24,15 @@ const Nav = ({ onClick, currentTab }) => {
         </Link>
       ))}
 
-      <a className={`${navbarLink} ${navbarLinkEmail}`}>pomejia@gmail.com</a>
+      <a
+        className={`${navbarLink} ${navbarLinkEmail}`}
+        href="mailto:pomejia@gmail.com?subject=Hey Oscar"
+        style={{
+          textDecoration: 'none',
+        }}
+      >
+        pomejia@gmail.com
+      </a>
     </nav>
   )
 }
