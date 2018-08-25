@@ -1,7 +1,7 @@
 import styles from './footer-module.module.css'
-
+import Link from 'gatsby-link'
 const Footer = () => {
-  const { footerBlock, footerContainer, title } = styles
+  const { footerBlock, footerContainer, title, link } = styles
   return (
     <footer className={footerBlock}>
       <div className={footerContainer}>
@@ -13,6 +13,7 @@ const Footer = () => {
                 color: '#f7df1e',
                 ':hover': {
                   textDecoration: 'underline',
+                  cursor: 'pointer',
                 },
               }}
             >
@@ -20,15 +21,29 @@ const Footer = () => {
             </a>
           </li>
           <li>
-            Hey, I'm a software developer from Texas. I can help you build and
-            grow your next product.
+            <p>
+              Hey, I'm a software developer from Texas. I can help you build and
+              grow your next product.
+            </p>
           </li>
         </ul>
         <ul>
           <li className={title}>Menu</li>
-          <li>About</li>
-          <li>Blog</li>
-          <li>Projects</li>
+          <li>
+            <Link to="/" className={link}>
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="/blog" className={link}>
+              Blog
+            </Link>
+          </li>
+          <li>
+            <Link to="/projects" className={link}>
+              Projects
+            </Link>
+          </li>
         </ul>
         <ul>
           <li className={title}>Contact</li>
@@ -39,6 +54,7 @@ const Footer = () => {
                 ':hover': {
                   textDecoration: 'underline',
                 },
+                cursor: 'pointer',
               }}
             >
               pomejia@gmail.com
@@ -47,9 +63,21 @@ const Footer = () => {
         </ul>
         <ul>
           <li className={title}>Social</li>
-          <li>Github</li>
-          <li>FreeCodeCamp</li>
-          <li>Codepen</li>
+          <li>
+            <a className={link} href="https://github.com/odm275">
+              Github
+            </a>
+          </li>
+          <li>
+            <a className={link} href="https://www.freecodecamp.org/odm275">
+              FreeCodeCamp
+            </a>
+          </li>
+          <li>
+            <a className={link} href="https://codepen.io/omejia/#">
+              Codepen
+            </a>
+          </li>
         </ul>
       </div>
       <p

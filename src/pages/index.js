@@ -232,6 +232,7 @@ export const featuredProjectsQuery = graphql`
         node {
           title
           slug
+          rating
           customer
           technologies
           shortPreview

@@ -1,27 +1,29 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import { NavLink } from 'react-router-dom'
 
 import styles from './nav-module.module.css'
-const Nav = ({ onClick, currentTab }) => {
+const Nav = () => {
   const tabKeys = [
     { text: 'About', id: '1', to: '/' },
     { text: 'Blog', id: '2', to: '/blog' },
     { text: 'Projects', id: '3', to: '/projects' },
   ]
 
-  const { navbarItems, navbarLinkVisited, navbarLink, navbarLinkEmail } = styles
+  const { navbarItems, navbarLink, navbarLinkEmail } = styles
   return (
     <nav className={navbarItems}>
       {tabKeys.map((tab, i) => (
-        <Link
+        <NavLink
           key={`${i}${tab.text}`}
-          className={currentTab === tab.id ? navbarLinkVisited : navbarLink}
           to={tab.to}
-          data-id={tab.id}
-          onClick={() => onClick(tab.id)}
+          className={navbarLink}
+          exact
+          activeStyle={{
+            color: '#f7df1e',
+          }}
         >
           {tab.text}
-        </Link>
+        </NavLink>
       ))}
 
       <a

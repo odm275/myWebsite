@@ -1,23 +1,15 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import { NavLink } from 'react-router-dom'
+
 import styles from './navmobile-module.module.css'
 const MobileNav = ({ toggleOn, onClickToggle, currentTab, onClickTab }) => {
-  const {
-    overlayExpand,
-    mobileNav,
-    overlay,
-    closebtn,
-    overlayContent,
-    navbarLinkVisited,
-    navbarLink,
-  } = styles
+  const { overlayExpand, mobileNav, overlay, closebtn, overlayContent } = styles
   const overlayExpandOn = toggleOn ? overlayExpand : overlay
   const tabKeys = [
     { text: 'About', id: '1', to: '/' },
     { text: 'Blog', id: '2', to: '/blog' },
     { text: 'Projects', id: '3', to: '/projects' },
   ]
-  console.log(currentTab)
   return (
     <nav className={mobileNav}>
       <div id="myNav" className={overlayExpandOn}>
@@ -32,15 +24,17 @@ const MobileNav = ({ toggleOn, onClickToggle, currentTab, onClickTab }) => {
         </a>
         <div className={overlayContent}>
           {tabKeys.map((tab, i) => (
-            <Link
+            <NavLink
               key={`${i}${tab.text}`}
-              className={currentTab === tab.id ? navbarLinkVisited : navbarLink}
               to={tab.to}
               data-id={tab.id}
-              onClick={() => onClickTab(tab.id)}
+              exact
+              activeStyle={{
+                color: '#f7df1e',
+              }}
             >
               {tab.text}
-            </Link>
+            </NavLink>
           ))}
         </div>
       </div>

@@ -16,7 +16,6 @@ class ProjectPost extends Component {
       featuredImage,
     } = this.props.data.contentfulProject
     const { projectContainer, navHeader, navDescription, projectPost } = styles
-    console.log(technologies)
     return (
       <main className={projectContainer}>
         <aside>

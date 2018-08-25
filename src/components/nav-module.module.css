@@ -14,12 +14,6 @@
   transition: 0.8s;
 }
 
-.navbarLinkVisited {
-  color: #f7df1e;
-  padding-right: 40px;
-  text-decoration: none;
-}
-
 .navbarLinkEmail {
   color: #c9c9c9;
 }

@@ -7,7 +7,6 @@
 .footerContainer {
   display: flex;
   justify-content: center;
-  color: #5d5d5d;
 }
 .footerContainer ul {
   padding-top: 2rem;
@@ -15,8 +14,21 @@
 .footerContainer ul li {
   list-style-type: none;
 }
+
+.footerContainer ul li p {
+  color: #5d5d5d;
+}
+
 .title {
   color: #c9c9c9;
+}
+.link {
+  color: #5d5d5d;
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+  color: #5d5d5d;
 }
 
 @media only screen and (max-width: 768px) {

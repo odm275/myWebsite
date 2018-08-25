@@ -81,13 +81,15 @@ const ProjectPage = ({ data }) => {
       }}
     >
       <ul style={projectStyle}>
-        {data.allContentfulProject.edges.map((edge, index) => {
-          return (
-            <div>
-              <ProjectPost node={edge.node} />
-            </div>
-          )
-        })}
+        {data.allContentfulProject.edges
+          .sort((a, b) => b.node.rating - a.node.rating)
+          .map((edge, index) => {
+            return (
+              <div>
+                <ProjectPost node={edge.node} />
+              </div>
+            )
+          })}
       </ul>
     </div>
   )
@@ -102,6 +104,7 @@ export const pageQuery = graphql`
         node {
           title
           slug
+          rating
           shortPreview
           technologies
           featuredImage {

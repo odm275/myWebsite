@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Full-Stack Web Developer | Houston, Texas',
   },
   plugins: [
     {
