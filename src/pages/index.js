@@ -5,7 +5,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import ProjectPage from './projects'
 import styles from './index-module.module.css'
 
-const Intro = () => {
+const Intro = ({ onClick }) => {
   const { introContainer, primaryIntro, secondaryIntro, downArrow } = styles
 
   return (
@@ -33,19 +33,25 @@ const Intro = () => {
           </a>
         </p>
       </div>
+      <FontAwesomeIcon
+        icon={faAngleDown}
+        size="2x"
+        className={downArrow}
+        onClick={onClick}
+      />
     </section>
   )
 }
 
 //data.allContentfulBlog.edges
-const RecentWork = ({ data }) => {
+const RecentWork = ({ data, myRef }) => {
   let dataPrime = { allContentfulProject: {} }
   dataPrime.allContentfulProject = data.featured
   const { sectionTitle } = styles
 
   // graphql query
   return (
-    <section className="recentWork">
+    <section className="recentWork" ref={myRef}>
       <nav
         style={{
           display: 'flex',
@@ -210,17 +216,32 @@ const HireMe = () => {
   )
 }
 
-const IndexPage = ({ data }) => {
-  return (
-    <div>
-      <Intro />
-      <RecentWork data={data} />
-      <Skills />
-      <HighlightProject data={data} />
-      <Social />
-      <HireMe />
-    </div>
-  )
+//this.props.data
+class IndexPage extends Component {
+  constructor(props) {
+    super(props)
+    this.downArrowRef
+    this.onScrollToElement = this.onScrollToElement.bind(this)
+  }
+  onScrollToElement(e) {
+    this.downArrowRef.scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
+  render() {
+    const { data } = this.props
+    let myRef = el => (this.downArrowRef = el)
+    return (
+      <div>
+        <Intro onClick={this.onScrollToElement} />
+        <RecentWork data={data} myRef={myRef} />
+        <Skills />
+        <HighlightProject data={data} />
+        <Social />
+        <HireMe />
+      </div>
+    )
+  }
 }
 
 export default IndexPage
