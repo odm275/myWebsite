@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import ProjectPage from './projects'
 import styles from './index-module.module.css'
 
@@ -220,17 +221,17 @@ const HireMe = () => {
 class IndexPage extends Component {
   constructor(props) {
     super(props)
-    this.downArrowRef
+    this.recentWorkRef
     this.onScrollToElement = this.onScrollToElement.bind(this)
   }
   onScrollToElement(e) {
-    this.downArrowRef.scrollIntoView({
+    this.recentWorkRef.scrollIntoView({
       behavior: 'smooth',
     })
   }
   render() {
     const { data } = this.props
-    let myRef = el => (this.downArrowRef = el)
+    let myRef = el => (this.recentWorkRef = el)
     return (
       <div>
         <Intro onClick={this.onScrollToElement} />

@@ -91,4 +91,7 @@ socialContact li:not(:last-child) {
   .skillsSection {
     display: block;
   }
+  .downArrow {
+    display: none;
+  }
 }
