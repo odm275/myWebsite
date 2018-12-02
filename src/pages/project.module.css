@@ -27,7 +27,7 @@
 .container:hover .emaily {
   opacity: 1;
 }
-.container:hover .tictactoe {
+.container:hover .getbrolic {
   opacity: 1;
 }
 
@@ -68,7 +68,7 @@
   transition: 0.5s ease;
   background-color: #ee6e73;
 }
-.tictactoe {
+.getbrolic {
   position: absolute;
   top: 0;
   bottom: 0;
